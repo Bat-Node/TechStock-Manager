@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<h2>Cadastrar Novo Fornecedor</h2>
+
+<form method="POST">
+    <label>Razão Social:</label>
+    <input type="text" name="razao_social" maxlength="120" required>
+
+    <label>CNPJ:</label>
+    <input type="text" name="cnpj" maxlength="18" placeholder="00.000.000/0000-00" required>
+
+    <label>Telefone:</label>
+    <input type="text" name="telefone" maxlength="20" placeholder="(00) 0000-0000">
+
+    <label>E-mail corporativo:</label>
+    <input type="email" name="email" maxlength="120" placeholder="contato@empresa.com.br">
+
+    <br>
+    <button type="submit">Cadastrar</button>
+</form>
+{% endblock %}

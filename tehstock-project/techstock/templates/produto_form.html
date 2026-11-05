@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<h2>Cadastrar Novo Produto</h2>
+
+<form method="POST">
+    <label>SKU:</label>
+    <input type="text" name="sku" required>
+
+    <label>Nome:</label>
+    <input type="text" name="nome" required>
+
+    <label>Fabricante:</label>
+    <input type="text" name="fabricante" required>
+
+    <label>Tipo:</label>
+    <select name="tipo">
+        <option value="Hardware">Hardware</option>
+        <option value="Software">Software</option>
+        <option value="Periferico">Periférico</option>
+    </select>
+
+    <label>Especificação / Versão:</label>
+    <input type="text" name="especificacao">
+
+    <label>Licenciamento (apenas software):</label>
+    <select name="licenciamento">
+        <option value="">Não se aplica</option>
+        <option value="Assinatura">Assinatura anual</option>
+        <option value="Perpetua">Perpétua / ESD</option>
+        <option value="OEM">OEM</option>
+    </select>
+
+    <label>Preço (R$):</label>
+    <input type="number" name="preco" step="0.01" min="0.01" required>
+
+    <label>Estoque inicial:</label>
+    <input type="number" name="estoque" min="0" value="0" required>
+
+    <label>Estoque mínimo:</label>
+    <input type="number" name="estoque_minimo" min="0" value="0" required>
+
+    <label>Localização:</label>
+    <input type="text" name="localizacao">
+
+    <label>Categoria:</label>
+    <select name="categoria_id">
+        {% for c in categorias %}
+            <option value="{{ c.id }}">{{ c.nome }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Fornecedor:</label>
+    <select name="fornecedor_id">
+        {% for f in fornecedores %}
+            <option value="{{ f.id }}">{{ f.razao_social }}</option>
+        {% endfor %}
+    </select>
+
+    <br>
+    <button type="submit">Cadastrar</button>
+</form>
+{% endblock %}

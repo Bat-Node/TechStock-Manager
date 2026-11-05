@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<h2>Movimentação de Estoque</h2>
+
+<form method="POST">
+    <label>Produto:</label>
+    <select name="produto_id">
+        {% for p in produtos %}
+            <option value="{{ p.id }}">{{ p.sku }} - {{ p.nome }} (saldo: {{ p.estoque }})</option>
+        {% endfor %}
+    </select>
+
+    <label>Tipo de operação:</label>
+    <select name="tipo">
+        <option value="Entrada">Entrada</option>
+        <option value="Saida">Saída</option>
+    </select>
+
+    <label>Quantidade:</label>
+    <input type="number" name="quantidade" min="1" required>
+
+    <label>Observação:</label>
+    <input type="text" name="observacao">
+
+    <br>
+    <button type="submit">Registrar</button>
+</form>
+
+<h2>Últimas movimentações</h2>
+
+<table>
+    <tr>
+        <th>Data/Hora</th>
+        <th>SKU</th>
+        <th>Produto</th>
+        <th>Tipo</th>
+        <th>Quantidade</th>
+        <th>Observação</th>
+    </tr>
+    {% for m in historico %}
+    <tr>
+        <td>{{ m.data_hora.strftime('%d/%m/%Y %H:%M') }}</td>
+        <td>{{ m.sku }}</td>
+        <td>{{ m.nome }}</td>
+        <td>{{ m.tipo }}</td>
+        <td>{{ m.quantidade }}</td>
+        <td>{{ m.observacao }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

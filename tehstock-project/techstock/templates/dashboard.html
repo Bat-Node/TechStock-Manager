@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<h2>Estoque</h2>
+
+<table>
+    <tr>
+        <th>SKU</th>
+        <th>Ativo</th>
+        <th>Fabricante</th>
+        <th>Categoria</th>
+        <th>Fornecedor</th>
+        <th>Preço</th>
+        <th>Saldo</th>
+        <th>Localização / Licença</th>
+        <th>Situação</th>
+        <th>Ação</th>
+    </tr>
+
+    {% for p in produtos %}
+    <tr {% if p.estoque <= p.estoque_minimo %}class="alerta"{% endif %}>
+        <td>{{ p.sku }}</td>
+        <td>{{ p.nome }}</td>
+        <td>{{ p.fabricante }}</td>
+        <td>{{ p.categoria }}</td>
+        <td>{{ p.fornecedor }}</td>
+        <td>R$ {{ "%.2f"|format(p.preco) }}</td>
+        <td>{{ p.estoque }}</td>
+        <td>
+            {{ p.localizacao }}
+            {% if p.licenciamento %}({{ p.licenciamento }}){% endif %}
+        </td>
+        <td>
+            {% if p.estoque <= p.estoque_minimo %}
+                <span class="badge">Risco de Ruptura / Reposição Necessária</span>
+            {% else %}
+                OK
+            {% endif %}
+        </td>
+        <td>
+            <form method="POST" action="{{ url_for('excluir_produto', id=p.id) }}"
+                  onsubmit="return confirm('Excluir este produto?')">
+                <button class="excluir">Excluir</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>TechStock Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h2>TechStock Manager</h2>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('novo_produto') }}">Novo Produto</a>
+        <a href="{{ url_for('movimentacao') }}">Movimentação</a>
+        <a href="{{ url_for('cadastros') }}">Categorias e Fornecedores</a>
+        <a href="{{ url_for('novo_fornecedor') }}">Novo Fornecedor</a>
+    </header>
+
+    <main>
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% for tipo, texto in mensagens %}
+                <div class="msg {{ tipo }}">{{ texto }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        {% block conteudo %}{% endblock %}
+    </main>
+</body>
+</html>

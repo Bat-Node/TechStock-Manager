@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<h2>Categorias</h2>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Ação</th>
+    </tr>
+    {% for c in categorias %}
+    <tr>
+        <td>{{ c.nome }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('excluir_categoria', id=c.id) }}"
+                  onsubmit="return confirm('Excluir esta categoria?')">
+                <button class="excluir">Excluir</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Fornecedores</h2>
+
+<table>
+    <tr>
+        <th>Razão Social</th>
+        <th>CNPJ</th>
+        <th>Ação</th>
+    </tr>
+    {% for f in fornecedores %}
+    <tr>
+        <td>{{ f.razao_social }}</td>
+        <td>{{ f.cnpj }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('excluir_fornecedor', id=f.id) }}"
+                  onsubmit="return confirm('Excluir este fornecedor?')">
+                <button class="excluir">Excluir</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
